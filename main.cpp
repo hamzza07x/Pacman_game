@@ -1,16 +1,3 @@
-/*
-Project:        PACMAN CLONE
-
-Designed by:        Muhmmad Hamza (23P0577)
-                          &
-                       Rana Zain (23F0026)
-*/
-
-
-
-
-
-
 //required header files
 #include <iostream>
 #include <windows.h> 
