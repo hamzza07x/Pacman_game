@@ -1,3 +1,4 @@
+//necessary header files
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -19,7 +20,6 @@
 #define RIGHT 77
 
 using namespace std;
-
 //constructor to intialzie game state
 Game::Game() : pacman_x(19), pacman_y(18), score(0), power_up_duration(75), power_up_timer(0),lives(3) {
     srand(time(0));//generates random time
@@ -137,35 +137,39 @@ void Game::update_ghost_inky() {
 }
 //inky chase behaviour
 void Game::update_inky_chase(Ghost& ghost) {
-    if (rand() % 2 == 0) {
-        int direction = rand() % 4;
-        if (direction == 2 && pacman_map[ghost_inky.y][ghost_inky.x - 1] != '*') {
-            ghost_inky.x--;
-        }
-        else if (direction == 3 && pacman_map[ghost_inky.y][ghost_inky.x + 1] != '*') {
-            ghost_inky.x++;
-        }
-        else if (direction == 3 && pacman_map[ghost_inky.y + 1][ghost_inky.x] != '*') {
-            ghost_inky.y++;;
-        }
-        else if (direction == 3 && pacman_map[ghost_inky.y - 1][ghost_inky.x] != '*') {
-            ghost_inky.y--;;
+    if (get_poer_up_status()) {
+        if (rand() % 2 == 0) {
+            int direction = rand() % 4;
+            if (direction == 2 && pacman_map[ghost_inky.y][ghost_inky.x - 1] != '*') {
+                ghost_inky.x--;
+            }
+            else if (direction == 3 && pacman_map[ghost_inky.y][ghost_inky.x + 1] != '*') {
+                ghost_inky.x++;
+            }
+            else if (direction == 3 && pacman_map[ghost_inky.y + 1][ghost_inky.x] != '*') {
+                ghost_inky.y++;;
+            }
+            else if (direction == 3 && pacman_map[ghost_inky.y - 1][ghost_inky.x] != '*') {
+                ghost_inky.y--;;
+            }
         }
     }
-    int direction_x = 40 - ghost.x;
-    int direction_y = this->pacman_y - ghost.y;
-    if (abs(direction_x) > abs(direction_y)) {
-        if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
-            ghost.x++;
-        }
-        else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
-            ghost.x--;
-        }
-        else if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
-            ghost.y++;
-        }
-        else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
-            ghost.y--;
+    else {
+        int direction_x = 40 - ghost.x;
+        int direction_y = this->pacman_y - ghost.y;
+        if (abs(direction_x) > abs(direction_y)) {
+            if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
+                ghost.x++;
+            }
+            else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
+                ghost.x--;
+            }
+            else if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
+                ghost.y++;
+            }
+            else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
+                ghost.y--;
+            }
         }
     }
 }
@@ -175,58 +179,7 @@ void Game::update_ghost_pinky() {
 }
 //pinky chase behaviour
 void Game::update_pinky_chase(Ghost& ghost) {
-    int direction = rand() % 4;
-    if (direction == 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
-        ghost.y--;
-    }
-    else if (direction == 1 && pacman_map[ghost.y + 1][ghost.x] != '*') {
-        ghost.y++;
-    }
-    else if (direction == 2 && pacman_map[ghost.y][ghost.x - 1] != '*') {
-        ghost.x--;
-    }
-    else if (direction == 3 && pacman_map[ghost.y][ghost.x + 1] != '*') {
-        ghost.x++;
-    }
-    int direction_x = this->pacman_x - ghost.x;
-    int direction_y = this->ghost_clyder.y - ghost.y;
-
-    if (abs(direction_x) > abs(direction_y)) {
-        if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
-            ghost.x++;
-        }
-        else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
-            ghost.x--;
-        }
-        else if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
-            ghost.y++;
-        }
-        else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
-            ghost.y--;
-        }
-    }
-    else {
-        if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
-            ghost.y++;
-        }
-        else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
-            ghost.y--;
-        }
-        else if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
-            ghost.x++;
-    }
-    else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
-        ghost.x--;
-    }
-}
-}
-//updates blinky according to its logic
-void Game::update_ghost_blinky() {
-    update_blinky_chase(ghost_blinky);
-}
-//blinky chase behaviour
-void Game::update_blinky_chase(Ghost& ghost) {
-    if (rand() % 3 == 0) {
+    if (get_poer_up_status()) {
         int direction = rand() % 4;
         if (direction == 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
             ghost.y--;
@@ -241,22 +194,80 @@ void Game::update_blinky_chase(Ghost& ghost) {
             ghost.x++;
         }
     }
+    else {
+        int direction_x = this->pacman_x - ghost.x;
+        int direction_y = this->ghost_clyder.y - ghost.y;
 
-    int direction_x = this->ghost_clyder.x - ghost.x;
-    int direction_y = this->pacman_y - ghost.y;
+        if (abs(direction_x) > abs(direction_y)) {
+            if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
+                ghost.x++;
+            }
+            else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
+                ghost.x--;
+            }
+            else if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
+                ghost.y++;
+            }
+            else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
+                ghost.y--;
+            }
+        }
+        else {
+            if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
+                ghost.y++;
+            }
+            else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
+                ghost.y--;
+            }
+            else if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
+                ghost.x++;
+            }
+            else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
+                ghost.x--;
+            }
+        }
+    }
+}
+//updates blinky according to its logic
+void Game::update_ghost_blinky() {
+    update_blinky_chase(ghost_blinky);
+}
+//blinky chase behaviour
+void Game::update_blinky_chase(Ghost& ghost) {
+    if (get_poer_up_status()) {
+        if (rand() % 3 == 0) {
+            int direction = rand() % 4;
+            if (direction == 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
+                ghost.y--;
+            }
+            else if (direction == 1 && pacman_map[ghost.y + 1][ghost.x] != '*') {
+                ghost.y++;
+            }
+            else if (direction == 2 && pacman_map[ghost.y][ghost.x - 1] != '*') {
+                ghost.x--;
+            }
+            else if (direction == 3 && pacman_map[ghost.y][ghost.x + 1] != '*') {
+                ghost.x++;
+            }
+        }
+    }
+    else {
+        int direction_x = this->ghost_clyder.x - ghost.x;
+        int direction_y = this->pacman_y - ghost.y;
 
-    if (abs(direction_x) > abs(direction_y)) {
-        if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
-            ghost.x++;
-        }
-        else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
-            ghost.x--;
-        }
-        else if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
-            ghost.y++;
-        }
-        else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
-            ghost.y--;
+        if (abs(direction_x) > abs(direction_y)) {
+            if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
+                ghost.x++;
+            }
+            else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
+                ghost.x--;
+            }
+            else if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
+                ghost.y++;
+            }
+            else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
+                ghost.y--;
+            }
         }
     }
 }
@@ -266,34 +277,51 @@ void Game::update_ghost_clyde() {
 }
 //clyde chase behaviour
 void Game::update_clyde_chase(Ghost& ghost) {
-    int direction_x = this->pacman_x - ghost.x;
-    int direction_y = this->pacman_y - ghost.y;
-    if (abs(direction_y) >= abs(direction_x)) {
-        if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
-            ghost.y++;
-        }
-        else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
+    if (get_poer_up_status()) {
+        int direction = rand() % 4;
+        if (direction == 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
             ghost.y--;
         }
-        else if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
-            ghost.x++;
+        else if (direction == 1 && pacman_map[ghost.y + 1][ghost.x] != '*') {
+            ghost.y++;
         }
-        else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
+        else if (direction == 2 && pacman_map[ghost.y][ghost.x - 1] != '*') {
             ghost.x--;
+        }
+        else if (direction == 3 && pacman_map[ghost.y][ghost.x + 1] != '*') {
+            ghost.x++;
         }
     }
     else {
-        if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
-            ghost.x++;
+        int direction_x = this->pacman_x - ghost.x;
+        int direction_y = this->pacman_y - ghost.y;
+        if (abs(direction_y) >= abs(direction_x)) {
+            if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
+                ghost.y++;
+            }
+            else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
+                ghost.y--;
+            }
+            else if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
+                ghost.x++;
+            }
+            else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
+                ghost.x--;
+            }
         }
-        else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
-            ghost.x--;
-        }
-        else if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
-            ghost.y++;
-        }
-        else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
-            ghost.y--;
+        else {
+            if (direction_x > 0 && pacman_map[ghost.y][ghost.x + 1] != '*') {
+                ghost.x++;
+            }
+            else if (direction_x < 0 && pacman_map[ghost.y][ghost.x - 1] != '*') {
+                ghost.x--;
+            }
+            else if (direction_y > 0 && pacman_map[ghost.y + 1][ghost.x] != '*') {
+                ghost.y++;
+            }
+            else if (direction_y < 0 && pacman_map[ghost.y - 1][ghost.x] != '*') {
+                ghost.y--;
+            }
         }
     }
 }
