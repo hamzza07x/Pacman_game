@@ -110,7 +110,7 @@ int main() {
                     game.update_ghost_inky();
                     game.update_ghost_pinky();
                     game.update_power_up();
-                    Sleep(150);//delay of 100 milisecond for next frame
+                    Sleep(50);//delay of 100 milisecond for next frame
                     //checks player collision
                     if (game.check_collision()) {
                         cout << "......GAME OVER...." << endl;
@@ -139,7 +139,6 @@ int main() {
                 cin.ignore();
             }
             else if (user_choice == 4) {
-                system("cls");
                 about_pacman();
                 cin.ignore();
                 cin.get();
