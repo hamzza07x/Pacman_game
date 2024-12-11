@@ -6,7 +6,6 @@ public:
     int x;
     //y coordinate for ghosts
     int y;
-  
 };
 //game class that is the class which has the game logic and data
 class Game {
