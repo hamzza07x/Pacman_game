@@ -3,7 +3,7 @@
 This is a simple Pac-Man clone built using C++ and a console-based interface. The game features Pac-Man, ghosts, power-ups, and a score system. The game allows the player to navigate Pac-Man through a maze, eat dots, avoid ghosts, and collect power-ups to gain temporary invincibility.
 
 <p align="center">
-  <img src="https://www.uzebox.org/wiki/images/1/18/Pacman.png" alt="Pacman" width="300" />
+  <img src="https://www.uzebox.org/wiki/images/1/18/Pacman.png" alt="Pacman" width="600" />
 </p>
 
 ## Table of Contents
