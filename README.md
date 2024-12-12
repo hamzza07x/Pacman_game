@@ -39,12 +39,13 @@ This is a simple Pac-Man clone built using C++ and a console-based interface. Th
 <h3 align="left">Languages and Tools:</h3>
 <p align="left"> 
   <a href="https://en.wikipedia.org/wiki/C%2B%2B#/media/File:ISO_C++_Logo.svg" target="_blank" rel="noreferrer">
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="C++" width="40" height="40"/> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="C++" width="40" height="40"/> 
   </a>
-  <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank" rel="noreferrer">
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="C" width="40" height="40"/> 
+  <a href="https://en.wikipedia.org/wiki/Visual_Studio" target="_blank" rel="noreferrer">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/visualstudio/visualstudio-plain.svg" alt="Visual Studio" width="40" height="40"/> 
   </a>
 </p>
+
 ## How to Run
 
 1. Clone this repository:
