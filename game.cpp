@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <conio.h>
 #include<math.h>
+#include"CORD.h"
 #include "game.h"
 //color macros for console output
 #define RED "\033[31m"
@@ -20,6 +21,13 @@
 #define RIGHT 77
 
 using namespace std;
+void gotoxy(int x, int y) {
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
 //constructor to intialzie game state
 Game::Game() : pacman_x(19), pacman_y(18), score(0), power_up_duration(75), power_up_timer(0),lives(3) {
     srand(time(0));//generates random time
@@ -47,9 +55,25 @@ void Game::update_power_up() {
 }
 //print game map to the console
 void Game::print_map() const {
-    system("cls");
+    //system("cls");
+    gotoxy(pacman_x, pacman_y);
+    cout << GREEN << 'P' << RESET;
+
+    gotoxy(ghost_inky.x, ghost_inky.y);
+    cout << RED << 'G' << RESET;
+
+    gotoxy(ghost_pinky.x, ghost_pinky.y);
+    cout << PINK << 'Q' << RESET;
+
+    gotoxy(ghost_blinky.x, ghost_blinky.y);
+    cout << BLUE << 'O' << RESET;
+
+    gotoxy(ghost_clyder.x, ghost_clyder.y);
+    cout << YELLOW << 'X' << RESET;
+
     for (int y = 0; y < 30; y++) {//map rows
         for (int x = 0; x < 40; x++) {//map columns
+            gotoxy(x, y);
             if (x == pacman_x && y == pacman_y) {
                 cout << GREEN << 'P' << RESET;//pacman
             }
@@ -77,8 +101,11 @@ void Game::print_map() const {
         }
         cout << endl;
     }
+    gotoxy(0, 30);
+    //gotoxy(0, 30);
     cout << "Score: " << this->score << endl;
     cout << "Lives: " << this->lives - 1 << endl;
+    //system("cls");
 }
 //updates pacman position according to user input
 void Game::update_position(char direction) {
@@ -444,7 +471,12 @@ void Player::move() {
 void Player::display() {
     game.print_map();
     if (game.get_poer_up_status()) {
+        gotoxy(0, 34);
         cout << RED << "POWER UP activate eat ghosts...." << RESET << endl;
+    }
+    else {
+        gotoxy(0, 34);
+        cout << "                                                " << endl;
     }
 }
 //sets the direction to some random initial direction as i have set to dir first user input
