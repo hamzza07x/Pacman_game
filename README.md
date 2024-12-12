@@ -48,9 +48,9 @@ This is a simple Pac-Man clone built using C++ and a console-based interface. Th
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/your-username/pacman-cpp.git
+git clone https://github.com/your-username/pacman-cpp.git
    cd pacman-cpp
--Compile the code using your preferred C++ compiler. For example, using g++:
+2. Compile the code using your preferred C++ compiler. For example, using g++:
  ```bash
  g++ -o pacman game.cpp -lm
 ./pacman
