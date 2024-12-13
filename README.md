@@ -1,4 +1,4 @@
-9# Pac-Man Game in C++
+### Pac-Man Game in C++
 
 This is a simple Pac-Man clone built using C++ and a console-based interface. The game features Pac-Man, ghosts, power-ups, and a score system. The game allows the player to navigate Pac-Man through a maze, eat dots, avoid ghosts, and collect power-ups to gain temporary invincibility.
 
