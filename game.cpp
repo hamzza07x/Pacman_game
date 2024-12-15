@@ -5,7 +5,6 @@
 #include <windows.h>
 #include <conio.h>
 #include<math.h>
-#include"CORD.h"
 #include "game.h"
 //color macros for console output
 #define RED "\033[31m"
