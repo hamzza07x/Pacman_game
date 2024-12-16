@@ -166,13 +166,13 @@ void Game::update_inky_chase(Ghost& ghost) {
     if (get_poer_up_status()) {
         if (rand() % 2 == 0) {
             int direction = rand() % 4;
-            if (direction == 2 && pacman_map[ghost_inky.y][ghost_inky.x - 1] != '*') {
+            if (direction == 0 && pacman_map[ghost_inky.y][ghost_inky.x - 1] != '*') {
                 ghost_inky.x--;
             }
-            else if (direction == 3 && pacman_map[ghost_inky.y][ghost_inky.x + 1] != '*') {
+            else if (direction == 1 && pacman_map[ghost_inky.y][ghost_inky.x + 1] != '*') {
                 ghost_inky.x++;
             }
-            else if (direction == 3 && pacman_map[ghost_inky.y + 1][ghost_inky.x] != '*') {
+            else if (direction == 2 && pacman_map[ghost_inky.y + 1][ghost_inky.x] != '*') {
                 ghost_inky.y++;;
             }
             else if (direction == 3 && pacman_map[ghost_inky.y - 1][ghost_inky.x] != '*') {
