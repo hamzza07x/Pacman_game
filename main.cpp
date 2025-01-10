@@ -1,5 +1,3 @@
-
-
 //required header files
 #include <iostream>
 #include <windows.h> 
